@@ -56,33 +56,6 @@ public class GhostBusterPlugin extends JavaPlugin implements Listener, CommandEx
         Bukkit.getScheduler().runTaskLater(this, () -> event.getPlayer().sendBlockChange(block.getLocation(), block.getType(), block.getData()), 3);
     }
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args){
-        if(!(sender instanceof Player)){
-            sender.sendMessage("Only players can use this command.");
-            return true;
-        }
-        if(args != null && args.length > 0){
-            if(args[0].equalsIgnoreCase("toggle")){
-                active = !active;
-                for(Player p: Bukkit.getOnlinePlayers()){
-                    if(p.isOp()){
-                        p.sendMessage(String.format("Ghost Block protection is now %s", active ? "active" : "disabled"));
-                    }
-                }
-                return true;
-            }
-            return false;
-        }
-        Player player = (Player)sender;
-        ItemStack pic = new ItemStack(Material.DIAMOND_PICKAXE);
-        ItemMeta meta = pic.getItemMeta();
-        meta.setUnbreakable(true);
-        meta.addEnchant(Enchantment.DIG_SPEED, 5, true);
-        pic.setItemMeta(meta);
-        player.getInventory().addItem(pic);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 60000, 2, true, false), true);
-        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 60000, 1, true, false), true);
-        return true;
-    }
+
+    
 }
